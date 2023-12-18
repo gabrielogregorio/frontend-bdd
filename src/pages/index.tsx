@@ -34,7 +34,7 @@ const Index = (): ReactElement => {
     <div className="flex items-center justify-center flex-col min-h-screen px-8">
       <h1 className="text-black text-lg font-bold">TODO LIST</h1>
       <ul className="max-w-[500px] w-full">
-        {todo.map((item) => {
+        {todo.map((item, index) => {
           return (
             <li
               key={item.id}
@@ -59,6 +59,7 @@ const Index = (): ReactElement => {
               <button
                 type="button"
                 className="p-2"
+                aria-label={`remover task ${index}`}
                 onClick={(event) => {
                   event.stopPropagation();
                   removeTodo(item.id);
@@ -75,13 +76,15 @@ const Index = (): ReactElement => {
           type="text"
           id="item"
           className="px-2 py-4 border-2 border-gray-400 w-full"
-          placeholder="Add todo"
+          placeholder="placeholder add task"
           onKeyDown={(event) => {
             if (event.code === 'Enter') {
               addTodo();
             }
           }}
-          onChange={(event) => setInput(event.target.value)}
+          onChange={(event) => {
+            setInput(event.target.value);
+          }}
           value={input}
         />
       </label>
@@ -92,7 +95,7 @@ const Index = (): ReactElement => {
         onClick={() => {
           addTodo();
         }}>
-        add todo
+        Adicionar
       </button>
     </div>
   );
